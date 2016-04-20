@@ -3,24 +3,31 @@
   become: yes
   user: vagrant
   tasks:
-    - name: yum update
-      yum: name=* state=latest
-    - name: epel
-      yum: name=epel-release state=present
     - user: name=tokuhirom
+
     - copy: src=~/.ssh/ dest=/home/tokuhirom/.ssh/ owner=tokuhirom group=tokuhirom mode=0700
     - file: path=/home/tokuhirom/.gradle state=directory
     - copy: src=~/.gradle/gradle.properties dest=/home/tokuhirom/.gradle/gradle.properties owner=tokuhirom group=tokuhirom mode=0600
     - copy: src=~/.pause dest=/home/tokuhirom/.pause owner=tokuhirom group=tokuhirom mode=0600
+
+    - name: yum update
+      yum: name=* state=latest
+    - name: epel
+      yum: name=epel-release state=present
+    - name: install the 'Development tools' package group
+      yum: name="@Development tools" state=present
     - yum: name="{{item}}" state=present
       with_items:
         - net-tools
         - perl-App-cpanminus
         - java-1.8.0-openjdk
+        - tree
+        - git
+        - lv
+        - less
     - cpanm: name="{{item}}" notest=True
       with_items:
         - CPAN::Uploader
         - Minilla
-        - Dist::Zilla
-
+        - Amon2
 
