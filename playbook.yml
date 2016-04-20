@@ -16,6 +16,7 @@
       with_items:
         - net-tools
         - perl-App-cpanminus
+        - java-1.8.0-openjdk
     - cpanm: name="{{item}}" notest=True
       with_items:
         - CPAN::Uploader
