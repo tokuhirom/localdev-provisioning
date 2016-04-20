@@ -1,0 +1,16 @@
+# localdev-provisioning
+
+## Usage
+
+Start a machine
+
+    vagrant up
+
+Run ansible
+
+    vagrant provision
+
+Restart a machine
+
+    vagrant reload
+
