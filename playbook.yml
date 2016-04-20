@@ -12,4 +12,14 @@
     - file: path=/home/tokuhirom/.gradle state=directory
     - copy: src=~/.gradle/gradle.properties dest=/home/tokuhirom/.gradle/gradle.properties owner=tokuhirom group=tokuhirom mode=0600
     - copy: src=~/.pause dest=/home/tokuhirom/.pause owner=tokuhirom group=tokuhirom mode=0600
+    - yum: name="{{item}}" state=present
+      with_items:
+        - net-tools
+        - perl-App-cpanminus
+    - cpanm: name="{{item}}" notest=True
+      with_items:
+        - CPAN::Uploader
+        - Minilla
+        - Dist::Zilla
+
 
