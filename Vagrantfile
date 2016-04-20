@@ -11,8 +11,6 @@ Vagrant.configure("2") do |config|
         end
     end
 
-    config.vm.synced_folder '.', '/vagrant'
-
     # Run Ansible from the Vagrant VM
     config.vm.provision "ansible" do |ansible|
         ansible.playbook = "playbook.yml"
