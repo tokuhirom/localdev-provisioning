@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  user: vagrant
+  tasks:
+    - name: yum update
+      yum: name=* state=latest
+    - name: epel
+      yum: name=epel-release state=present
+    - user: name=tokuhirom
+    - copy: src=~/.ssh/ dest=/home/tokuhirom/.ssh/ owner=tokuhirom group=tokuhirom mode=0700
+    - file: path=/home/tokuhirom/.gradle state=directory
+    - copy: src=~/.gradle/gradle.properties dest=/home/tokuhirom/.gradle/gradle.properties owner=tokuhirom group=tokuhirom mode=0600
+    - copy: src=~/.pause dest=/home/tokuhirom/.pause owner=tokuhirom group=tokuhirom mode=0600
+
