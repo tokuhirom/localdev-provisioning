@@ -2,6 +2,7 @@
 - hosts: all
   become: yes
   user: vagrant
+
   tasks:
     - user: name=tokuhirom
 
@@ -25,6 +26,7 @@
         - git
         - lv
         - less
+        - mariadb-server
     - cpanm: name="{{item}}" notest=True
       with_items:
         - CPAN::Uploader
