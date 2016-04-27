@@ -10,6 +10,7 @@
     - file: path=/home/tokuhirom/.gradle state=directory
     - copy: src=~/.gradle/gradle.properties dest=/home/tokuhirom/.gradle/gradle.properties owner=tokuhirom group=tokuhirom mode=0600
     - copy: src=~/.pause dest=/home/tokuhirom/.pause owner=tokuhirom group=tokuhirom mode=0600
+    - copy: src=~/.gitconfig dest=/home/tokuhirom/.gitconfig owner=tokuhirom group=tokuhirom mode=0600
 
     - name: yum update
       yum: name=* state=latest
@@ -27,9 +28,19 @@
         - lv
         - less
         - mariadb-server
+        - tmux
+        - vim
     - cpanm: name="{{item}}" notest=True
       with_items:
         - CPAN::Uploader
         - Minilla
         - Amon2
+
+    - name: add tokuhirom to /etc/sudoers
+      lineinfile:
+        dest: /etc/sudoers
+        backup: yes
+        state: present
+        regexp: '^tokuhirom'
+        line: 'tokuhirom ALL=(ALL) NOPASSWD: ALL'
 
